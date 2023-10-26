@@ -1,4 +1,3 @@
-
 const defaultEventName = "";
 const defaultEventDate = new Date("2023-11-04T17:00:00");
 
@@ -6,33 +5,41 @@ const defaultEventDate = new Date("2023-11-04T17:00:00");
 const eventNameElement = document.getElementById("eventName");
 eventNameElement.textContent = defaultEventName;
 
-// Calcula la diferencia de tiempo entre la fecha predeterminada y la fecha y hora actual
-const timeRemaining = timeDiff(defaultEventDate);
+// Función para actualizar el tiempo restante
+function updateRemainingTime() {
+    const timeRemaining = timeDiff(defaultEventDate);
 
-// Muestra la cantidad de días, horas y minutos restantes en el contenedor de eventos
-const eventsContainer = document.getElementById("eventsContainer");
-eventsContainer.innerHTML = `
-    <div class="event">
-        <div class="days">
-            <div class="box">
-                <span class="days-number">${timeRemaining.days}</span>
-                <span class="date-text">días</span>
+    // Muestra la cantidad de días, horas y minutos restantes en el contenedor de eventos
+    const eventsContainer = document.getElementById("eventsContainer");
+    eventsContainer.innerHTML = `
+        <div class="event">
+            <div class="days">
+                <div class="box">
+                    <span class="days-number">${timeRemaining.days}</span>
+                    <span class="date-text">días</span>
+                </div>
+            </div>
+            <div class="hours">
+                <div class="box">
+                    <span class="hours-number">${timeRemaining.hours}</span>
+                    <span class="hours-text">horas</span>
+                </div>
+            </div>
+            <div class="minutes">
+                <div class="box">
+                    <span class="minutes-number">${timeRemaining.minutes}</span>
+                    <span class="minutes-text">minutos</span>
+                </div>
             </div>
         </div>
-        <div class="hours">
-        <div class="box">
-            <span class="hours-number">${timeRemaining.hours}</span>
-            <span class="hours-text">horas</span>
-            </div>
-        </div>
-        <div class="minutes">
-        <div class="box">
-            <span class="minutes-number">${timeRemaining.minutes}</span>
-            <span class="minutes-text">minutos</span>
-            </div>
-        </div>
-    </div>
-`;
+    `;
+}
+
+// Llama a la función de actualización inicial
+updateRemainingTime();
+
+// Actualiza el tiempo restante cada segundo (ajusta el intervalo según sea necesario)
+setInterval(updateRemainingTime, 1000);
 
 // La función timeDiff calcula la diferencia de tiempo en días, horas y minutos
 function timeDiff(targetDateTime) {
